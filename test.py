@@ -2,7 +2,6 @@
 
 
 import pyaudio
-#print pyaudio
 import struct
 import math
 import wave
@@ -34,15 +33,13 @@ channels = f.getnchannels()
 frames=f.getnframes()
 duration=frames/framerate
 
-#this is the number which determines how fast the user is speaking
-#
-avg_utterance_of_words=0.3
+
 
 print "Duration"+str(duration)
 print "Framerate"+str(framerate)
 print "Frames"+str(frames)
 
-# copy and pasted from soneone else's code.
+# copy and pasted from someone else's code.
 #gets the root mean square amplitude from each block
 
 def get_rms( block ):
@@ -60,7 +57,6 @@ def get_rms( block ):
         return
     format = "%dh"%(count) 
     shorts = struct.unpack( format, block )
-##    print framerate
 
     # iterate over the block.
     sum_squares = 0.0
@@ -69,7 +65,7 @@ def get_rms( block ):
         # normalize it to 1.0
         n = sample * SHORT_NORMALIZE
         sum_squares += n*n
-        #amp_list.append( math.sqrt( sum_squares / count ))
+       
 
     return math.sqrt( sum_squares / count )
 
@@ -98,7 +94,7 @@ class FluencyTester(object):
     def listen(self):
         # this is count of pause occured,
         pause_count=0
-        # if twp pause occurs in succesion then this gets increased and actually
+        # if two pause occurs in succesion then this gets increased and actually
         # counted as a pause
         alternate_pause_count=0
         # counting the number of loops?!!!
